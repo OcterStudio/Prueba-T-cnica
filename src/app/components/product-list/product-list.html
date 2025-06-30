@@ -1,0 +1,34 @@
+<h2 class="text-2xl font-bold mb-4">Lista de Productos</h2>
+<div class="mb-4">
+  <a routerLink="/create" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+    Agregar Producto
+  </a>
+</div>
+<div *ngIf="products.length > 0; else noItems" class="overflow-x-auto">
+  <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+    <thead class="bg-gray-200 text-gray-700">
+      <tr>
+        <th class="py-3 px-4 text-left">ID</th>
+        <th class="py-3 px-4 text-left">Nombre</th>
+        <th class="py-3 px-4 text-left">Descripción</th>
+        <th class="py-3 px-4 text-left">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products" class="border-b border-gray-200 hover:bg-gray-50">
+        <td class="py-3 px-4">{{ product.id }}</td>
+        <td class="py-3 px-4">{{ product.name }}</td>
+        <td class="py-3 px-4">{{ product.price }}</td>
+        <td class="py-3 px-4">{{ product.email }}</td>
+        <td class="py-3 px-4">{{ product.date }}</td>
+        <td class="py-3 px-4">
+          <button (click)="router.navigate(['/edit', product.id])" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-1 px-2 rounded text-xs mr-2">Editar</button>
+          <button (click)="deleteProduct(product.id)" class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded text-xs">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<ng-template #noItems>
+  <p class="text-gray-600">No hay elementos para mostrar.</p>
+</ng-template>
